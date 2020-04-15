@@ -1,7 +1,11 @@
 ---
 keywords: fastai
-description: summary
-title: Title
+description: A tutorial on Linear Regression from scratch in Python
+title: Linear Regression from Scratch
+toc: true 
+badges: true
+comments: true
+categories: [Machine Learning]
 nb_path: _notebooks/2020-03-27-Linear Regression Scratch.ipynb
 layout: notebook
 ---
@@ -24,7 +28,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Linear-Regression-from-Scratch-in-Python">Linear Regression from Scratch in Python<a class="anchor-link" href="#Linear-Regression-from-Scratch-in-Python"> </a></h1>
+<h2 id="Import-libraries">Import libraries<a class="anchor-link" href="#Import-libraries"> </a></h2>
 </div>
 </div>
 </div>
@@ -73,16 +77,17 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Univariate-Regression">Univariate Regression<a class="anchor-link" href="#Univariate-Regression"> </a></h1><p><code>h(Ø) = Øx + b</code></p>
-<h2 id="MSE-cost-function">MSE cost function<a class="anchor-link" href="#MSE-cost-function"> </a></h2><h2 id="Gradient-Descent:">Gradient Descent:<a class="anchor-link" href="#Gradient-Descent:"> </a></h2><p><b><i>
-repeat {
+<h2 id="Univariate-Regression">Univariate Regression<a class="anchor-link" href="#Univariate-Regression"> </a></h2><blockquote><p><code>h(Ø) = Øx + b</code></p>
+</blockquote>
+<h3 id="MSE-cost-function">MSE cost function<a class="anchor-link" href="#MSE-cost-function"> </a></h3><p><code>sum[(h(x) - y)^2]</code></p>
+<h3 id="Gradient-Descent">Gradient Descent<a class="anchor-link" href="#Gradient-Descent"> </a></h3>
+<pre><code>repeat {
 
-    Ø = Ø - ∆J(Ø) = Ø - LR*1/m * sum((h(Ø, b) - Y)*X)
+    Ø = Ø - ∆J(Ø) = Ø - LR*1/m * sum((h(Ø, b) - Y)*X)    
 
     b = b - ∆J(b) =  b - LR*1/m * sum((h(Ø, b) - Y))
+  }</code></pre>
 
-}
-</i></b></p>
 </div>
 </div>
 </div>

@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: Overfitted
+description: Blogs on AI and Programming.
 github_username: aniketmaurya
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "blog"
@@ -43,7 +43,7 @@ minima:
     github: aniketmaurya
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math: true
 
 # Set this to true to display the summary of your blog post under your title on the Home page.
 show_description: true
@@ -55,7 +55,7 @@ show_image: true
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics: "UA-156199072-1"
+google_analytics: UA-156199072-1
 
 exclude:
   - docker-compose.yml
