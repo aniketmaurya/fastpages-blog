@@ -14,7 +14,7 @@ github_repo: "blog"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
-url: "https://aniketmaurya.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: https://aniketmaurya.github.io # the base hostname & protocol for your site, e.g. http://example.com
 
 ###########################################################
 #########  Special Instructions for baseurl ###############
@@ -38,9 +38,9 @@ baseurl: "/blog" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
 minima:
-  social_links:
-    twitter: fastdotai
-    github: fastai
+  social_links: UA-156199072-1
+    twitter: aniketmaurya
+    github: aniketmaurya
 
 # Set this to true to get LaTeX math equation support
 use_math: 
@@ -49,7 +49,7 @@ use_math:
 show_description: true
 
 # Set this to true to display image previews on home page, if they exist
-show_image: false
+show_image: true
 
 # Set this to true to display tags on each post
 show_tags: true
