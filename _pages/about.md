@@ -6,6 +6,11 @@ permalink: /about/
 <!-- How you started working -->
 <!-- current work -->
 <!-- Other roles and interest -->
+
+<!-- ![alt text](https://avatars2.githubusercontent.com/u/21018714?s=460&u=f522c89f28b5a41593eb851cd85c58c3a7422fdf&v=4 =240x) -->
+
+<img src='https://avatars2.githubusercontent.com/u/21018714?s=460&u=f522c89f28b5a41593eb851cd85c58c3a7422fdf&v=4' height=350>
+
 Aniket Maurya is a professional Machine Learning and Computer-Vision Engineer. He started working in Computer-Vision as intern at [COVIAM Technologies](https://coviam.com) to build a Face Recognition system for attendance. He is currently working in various Computer Vision Deep Learning projects at COVIAM.
 
 He writes blog in his spare time on various Deep Learning topics.
