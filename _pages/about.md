@@ -3,11 +3,14 @@ layout: page
 title: About Me
 permalink: /about/
 ---
+<!-- How you started working -->
+<!-- current work -->
+<!-- Other roles and interest -->
+Aniket Maurya is a professional Machine Learning and Computer-Vision Engineer. He started working in Computer-Vision as intern at [COVIAM Technologies](https://coviam.com) to build a Face Recognition system for attendance. He is currently working in various Computer Vision Deep Learning projects at COVIAM.
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
-
-This website is powered by **[fastpages](https://github.com/fastai/fastpages)** [^1].
-
+He writes blog in his spare time on various Deep Learning topics.
+You can [contact](mailto:theaniketmaurya@gmail.com) him for freelance work.
 
 
-[^1]:a blogging platform that natively supports Jupyter notebooks in addition to other formats.
+<br><br>
+<sup><sub>This website is powered by *[fastpages](https://github.com/fastai/fastpages)*</sub></sup>
