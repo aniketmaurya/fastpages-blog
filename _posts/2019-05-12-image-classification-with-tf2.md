@@ -1,9 +1,15 @@
 ---
 toc: true
 layout: post
-description: A minimal example of using markdown with fastpages.
+description: Image Classification with Tensorflow 2.x.
 categories: [Tensorflow, Deep Learning]
 title: Image Classification with Tensorflow 2.x
+
+keywords: tensorflow, deep learning, image classification
+badges: true
+comments: true
+image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
+# layout: notebook
 ---
 
 # Image Classification with TF 2
@@ -88,16 +94,18 @@ optimizer="sgd", metrics=["accuracy"])
 
 After the model compilation, we can all fit() method by specifying the epochs, batch size, etc.
 
-#### Training model for 30 epochs*
+##### Training model
 
 ```python
 history = model.fit(X_train, y_train,
 epochs=30, validation_data=(X_valid, y_valid*))*
 ```
 
-This method will train the model for 30 epochs. Train loss, Validation loss and train accuracy, validation accuracy can be found in **history.history**.
+This method will train the model for 30 epochs. Train loss, Validation loss and train accuracy, validation accuracy can be found in *history.history*.
 
-We can create a visualization for the learning curve using **history**.
+
+##### Loss visualization
+We can create a visualization for the learning curve using *history*.
 
 ```python
 import pandas as pd
@@ -113,6 +121,7 @@ We can see that the space between validation and training curves are small that�
 
 Now, we can try out different hyperparameters to achieve more accuracy on the dataset.
 
+#### Model Evaluation
 If you are satisfied with the training and validation accuracy then evaluate it on the test set.
 
 ```python
@@ -122,19 +131,18 @@ If you are satisfied with the training and validation accuracy then evaluate it 
 
 ### Save the trained Model
 
-After you have trained and evaluated your NN model on test set you can download your model using Keras save() method and then can load it anytime for inference.
+After you have trained and evaluated your NN model on test set you can download your model using Keras `tf.keras.models.save_model` method and then can load it anytime for inference.
 
 ```python
-# save your model as HDF5 format
-model.save("my_keras_model.h5")
+tf.keras.models.save_model("my_image_classifier")
 ```
 
-It saves both the model’s architecture and the value of all the model parameters for every layer (All trained weights and biases).
+It saves both the model’s architecture and the value of all the model parameters for every layer (All trained weights and biases). This *saved_model* can be loaded to TF serving for deployement purpose.
 
 If you want to use your trained model for inference, just load it:
 
 ```python
-model = keras.models.load_model("my_keras_model.h5")
+model = tf.keras.models.load_model("my_image_classifier")
 ```
 
 Now, it’s time to train different datasets on your own. Good Luck 😄!
@@ -145,7 +153,7 @@ Now, it’s time to train different datasets on your own. Good Luck 😄!
 
 1. Deep learning specialization (Coursera)
 
-1. “Hands-On Machine Learning with Scikit-Learn and TensorFlow” by [Aurélien Géron](undefined) (Book from O’Reilly)
+2. “Hands-On Machine Learning with Scikit-Learn and TensorFlow” by [Aurélien Géron](undefined) (Book from O’Reilly)
 
 <br><br>
 You can contact me at [twitter.com/aniketmaurya](http://twitter.com/iamaniketmaurya) or drop an 📧 at [aniketmaurya@outlook.com](http://aniketmaurya@outlook.com)
