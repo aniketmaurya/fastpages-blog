@@ -6,7 +6,7 @@ toc: true
 badges: true
 comments: true
 categories: [Machine Learning]
-nb_path: _notebooks/2020-03-27-Linear Regression Scratch.ipynb
+nb_path: https://github.com/aniketmaurya/machine_learning/blob/master/blog_files/2020-03-27-Linear-Regression-Scratch/2020-03-27-Linear%20Regression%20Scratch.ipynb
 layout: notebook
 ---
 
