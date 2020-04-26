@@ -1,15 +1,16 @@
 ---
-toc: true
-layout: post
+title: Face Recognition
 description: Learn to create Face Recognition system from scratch
 categories: [Tensorflow, Face Recognition]
-title: Face Recognition
 
-keywords: tensorflow, deep learning, image classification
+toc: true
 badges: true
 comments: true
 image: https://cdn-images-1.medium.com/max/2000/1*t3DEmVOWOuWjIo_TjcpxNQ.gif
 layout: post
+
+keywords: face recognition, tensorflow, deep learning, python
+
 ---
 
 
@@ -117,4 +118,4 @@ def recognize_me(input_embedding):
 
 You can provide your feedback in comment section below.
 
-**Follow me on [twitter.com/aniketmaurya](Twitter)**
+**Follow me on [Twitter](https://twitter.com/aniketmauryaTwitter)**
