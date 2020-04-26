@@ -1,7 +1,7 @@
 ---
 title: Normalization
 description: Normalization techniques and effect of normalization.
-categories: [Tensorflow, Deep Learning]
+categories: [Deep Learning, Machine Learning]
 
 toc: true
 layout: post

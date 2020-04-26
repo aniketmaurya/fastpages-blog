@@ -1,5 +1,5 @@
 ---
-keywords: fastai
+keywords: Linear Regression, maths, gradient descent, machine learning
 description: A tutorial on Linear Regression from scratch in Python
 title: Linear Regression from Scratch
 toc: true 
