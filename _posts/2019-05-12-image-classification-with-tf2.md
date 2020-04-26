@@ -9,7 +9,7 @@ keywords: tensorflow, deep learning, image classification
 badges: true
 comments: true
 image: https://4.bp.blogspot.com/-mya0XZqrtJs/XoN9SufkS2I/AAAAAAAAC5w/y5POjjt0Rs8B8uLLO1gegGb74MYTx7W7gCLcBGAsYHQ/s1600/TF_FullColor_Icon.jpg
-# layout: notebook
+layout: notebook
 ---
 
 # Image Classification with TF 2
