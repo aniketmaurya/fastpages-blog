@@ -1,15 +1,15 @@
 ---
+title: Normalization
+description: Normalization techniques and effect of normalization.
+categories: [Tensorflow, Deep Learning]
+
 toc: true
 layout: post
-description: Image Classification with Tensorflow 2.x.
-categories: [Tensorflow, Deep Learning]
-title: Normalization in Deep Learning
-
-keywords: tensorflow, deep learning, image classification
 badges: true
 comments: true
-image: 
-layout: post
+image: https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-26-Normalization/0_y6ooHSrMwL6krpWY.png
+
+keywords: tensorflow, deep learning, image classification
 ---
 
 # Normalization in Deep Learning
