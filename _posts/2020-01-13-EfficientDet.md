@@ -1,5 +1,5 @@
 ---
-keywords: object detection, efficientdet, google, automl
+keywords: object detection, efficientdet, google, automl, efficientnet
 description: EfficientDet, highly efficient and scalable state of the art object detection model developed by Google Research, Brain Team.
 title: "EfficientDet: When Object Detection Meets Scalability and Efficiency"
 toc: true 
@@ -7,7 +7,7 @@ badges: true
 comments: true
 categories: [Object Detection]
 
-image: https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/network.png
+image: https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/compare.png
 
 layout: post
 ---

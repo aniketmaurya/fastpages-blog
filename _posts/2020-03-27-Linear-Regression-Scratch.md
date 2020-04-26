@@ -6,6 +6,7 @@ toc: true
 badges: true
 comments: true
 categories: [Machine Learning]
+image: https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Anscombe%27s_quartet_3.svg/440px-Anscombe%27s_quartet_3.svg.png
 nb_path: _notebooks/2020-03-27-Linear Regression Scratch.ipynb
 layout: notebook
 ---
