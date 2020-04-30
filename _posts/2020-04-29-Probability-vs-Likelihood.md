@@ -8,7 +8,7 @@ layout: post
 comments: false
 image: https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-29-Probability-vs-Likelyhood/dice-min.jpg
 
-keywords: machine learning, deep learning, statistics, autoencoders, ga
+keywords: machine learning, statistics, autoencoders, probability, likelihood, distribution
 ---
 
 ![](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-29-Probability-vs-Likelyhood/dice-min.jpg "Photo by Riho Kroll on Unsplash")
@@ -32,7 +32,7 @@ $P(dice_1=6\cap dice_2=6) = P(dice_1=6) \times P(dice_2=6)=\frac{1}{6} \times \f
 
 **What if one of the dice is biased towards 6, i.e.** <bold> $P(dice_1=6) = 1/4\ and\ P(dice_2=6)=1/6$</bold>
 
-Our probability will become <small>$P(dice_1=6\cap dice_2=6) = 1/6 \times 1/4$</small>
+The probability will become <bold>$P(dice_1=6\cap dice_2=6) = 1/6 \times 1/4$</bold>
 
 ## Joint Probability
 Joint probability is the probability of two events occurring simultaneously.
@@ -40,20 +40,33 @@ Rolling two dice together is an example of Joint Probability.
 
 If the two events E1 and E2 are independent of each other then the joint probability is multiplication of P(E1) and P(E2).
 
-> $P(A\ given\ B)$ is denoted as $P(A\|B)$
+<small>$P(E_1\ and\ E_2) = P(E_1) \times P(E_2)$</small>
 
-<small>$P(E_1\ and\ E_2) = P(E_1) \times P(E_2) = P(E_1|E_2)P(E_2) = P(E_2|E_1)P(E_1)$</small>
-
+`P(A given B) is denoted as P(A|B)`
 
 If the two events E1 and E2 are not independent then the joint probability is:
 
-<small>$P(E_1\ and\ E_2) = P(E_1|E_2)P(E_2) = P(E_2|E_1)P(E_1)$</small>
+<bold>$P(E_1\ and\ E_2) = P(E_1|E_2)P(E_2) = P(E_2|E_1)P(E_1)$</bold>
 
+
+### Joint probability is symmetric
+```math
+P(A,B) = P(B, A)
+
+P(A,B) = P(B|A)P(A)
+
+P(B,A) = P(A|B)P(B)
+
+P(A|B)P(B) = P(B|A)P(A)
+```
+$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$
 
 ## Conditional Probability
-It is the probability of one event when the other is given.
+It is the probability of one event when occurence of the other is given.
 
-Probability of getting a 6 given that the die is biased one, that is P(6) = 1/4
+Consider two events A and B, given that B has occurred. Then the probability of A given B is:
+
+$P(A\|B) =  \frac{P(B\|A)P(B)}{P(A)} = \frac{P(A, B)}{P(A)}$
 
 
 
