@@ -19,7 +19,7 @@ Unlike previous versions, TensorFlow 2.0 is coming out with some major changes. 
 [Keras](https://keras.io) is a high-level API that allows to easily build, train, evaluate and execute all sorts of neural networks. Keras was developed by François Chollet and open-sourced in March 2015. With its simplicity and easy-to-use feature, it gained popularity very quickly. Tensorflow comes with its own implementation of Keras with some TF specific features.
 > Keras can run on top of MXNet, CNTK or Theano.
 
-![Keras](https://cdn-images-1.medium.com/max/2000/1*t4P9JrUaMS_OyL4T9YsnKA.png)
+![TF-Logo](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/logo/tf-logo-rect.jpg)
 
 # Building a simple image classifier
 
