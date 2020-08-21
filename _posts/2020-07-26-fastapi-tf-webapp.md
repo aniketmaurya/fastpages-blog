@@ -23,21 +23,26 @@ It provides support for Swagger UI out of the box.
 
 ### A simple hello-world example
 
-We first import fastapi `FastAPI` class and create and object. This object have many useful (parameters)[https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30]. We can pass the title and description for Swagger UI.
+We first import fastapi `FastAPI` class and create and object. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30), like we can pass the title and description for Swagger UI.
 
 ```python
 from fastapi import FastAPI
 app = FastAPI(title='Hello world', description='This is a hello world example', version='0.0.1')
 ```
 
+We define a function and decorate it with `@app.get`. This means that our api ``/index`` is a GET method. The function defined here is **async**, FastAPI automatically takes care of async and without async methods by creating a threadpool for the normal functions and it uses async event loop for async functions.
 
 ```python
-@app.get('/)
+@app.get('/index)
 async def hello_world():
     return "hello world"
 ```
 
 ### Image recognition API
+
+We will create an API to classify images, we name it `predict/image`.
+We will use Tensorflow for creating the image classification model.
+
 ```python
 @app.post("/predict/image")
 async def predict_api(file: UploadFile = File(...)):
