@@ -30,10 +30,10 @@ from fastapi import FastAPI
 app = FastAPI(title='Hello world', description='This is a hello world example', version='0.0.1')
 ```
 
-We define a function and decorate it with `@app.get`. This means that our api ``/index`` is a GET method. The function defined here is **async**, FastAPI automatically takes care of async and without async methods by creating a threadpool for the normal functions and it uses async event loop for async functions.
+We define a function and decorate it with `@app.get`. This means that our api ``/index`` supports GET method. The function defined here is **async**, FastAPI automatically takes care of async and without async methods by creating a threadpool for the normal functions and it uses async event loop for async functions.
 
 ```python
-@app.get('/index)
+@app.get('/index')
 async def hello_world():
     return "hello world"
 ```
@@ -42,6 +42,20 @@ async def hello_world():
 
 We will create an API to classify images, we name it `predict/image`.
 We will use Tensorflow for creating the image classification model.
+
+> Blog post for [Image Classification with Tensorflow](https://aniketmaurya.ml/blog/tensorflow/deep%20learning/2019/05/12/image-classification-with-tf2.html)
+
+First we create a function `load_model`, which will return a MobileNet CNN Model with pretrained weights i.e. it is already trained to classify 1000 unique category of images.
+
+```python
+import tensorflow as tf
+
+def load_model():
+    model = tf.keras.applications.MobileNetV2(weights="imagenet")
+    print("Model loaded")
+    return model
+```
+
 
 ```python
 @app.post("/predict/image")
