@@ -14,6 +14,8 @@ image: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
 keywords: tensorflow, fastapi, python, web development, machine learning, computer vision
 ---
 
+![](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png "Source- FastAPI Docs")
+
 > FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
 
 FastAPI is a high performance asynchronous framework for building APIs in Python.
