@@ -1,17 +1,26 @@
 ---
-keywords: tensorflow, fastapi, python, web development, Python programming, deployment
-description: Deploying Tensorflow FastAPI web app on cloud
-title: Deploying Tensorflow FastAPI web app
-toc: true 
-badges: true
-comments: true
+title: Machine Learning APIs with FastAPI
+description: Tutorial on FastAPI - high performance asynchronous framework for faster development production ready APIs.
 categories: [python]
 
-image: https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-01-13-EfficientDet/compare.png
-
+toc: true
 layout: post
+badges: true
+comments: true
+
+image: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
+
+
+keywords: tensorflow, fastapi, python, web development, machine learning, computer vision
 ---
-# Coming soon .
+
+> FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
+
+FastAPI is a high performance asynchronous framework for building APIs in Python.
+# in progress
+
+
+
 
 
 
