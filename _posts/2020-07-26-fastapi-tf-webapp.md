@@ -17,21 +17,21 @@ keywords: tensorflow, fastapi, python, web development, machine learning, comput
 ![](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png "Source- FastAPI Docs")
 
 
-FastAPI is a high performance asynchronous framework for building APIs in Python.
+FastAPI is a high-performance asynchronous framework for building APIs in Python.
 It provides support for Swagger UI out of the box.
 
 > Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
 
 # Lets start with a simple hello-world example
 
-First we import `FastAPI` class and create and object `app`. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30), like we can pass the title and description for Swagger UI.
+First, we import `FastAPI` class and create an object `app`. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30) like we can pass the title and description for Swagger UI.
 
 ```python
 from fastapi import FastAPI
 app = FastAPI(title='Hello world', description='This is a hello world example', version='0.0.1')
 ```
 
-We define a function and decorate it with `@app.get`. This means that our api ``/index`` supports GET method. The function defined here is **async**, FastAPI automatically takes care of async and without async methods by creating a threadpool for the normal def functions and it uses async event loop for async functions.
+We define a function and decorate it with `@app.get`. This means that our API ``/index`` supports the GET method. The function defined here is **async**, FastAPI automatically takes care of async and without async methods by creating a thread pool for the normal def functions and it uses an async event loop for async functions.
 
 ```python
 @app.get('/index')
@@ -42,12 +42,11 @@ async def hello_world():
 
 # Pydantic support
 
-One of my favourite feature offered by FastAPI is Pydantic support. We can define Pydantic models and request response will be handled by FastAPI for these models.
-Lets create a covid-19 symptom checker API to understand this.
+One of my favorite features offered by FastAPI is Pydantic support. We can define Pydantic models and request-response will be handled by FastAPI for these models.
+Let's create a COVID-19 symptom checker API to understand this.
 
 ## Covid-19 symptom checker API
-We create request body, it is the format in which client should send the request.
-
+We create a request body, it is the format in which the client should send the request. It will be used by Swagger UI.
 ```python
 from pydantic import BaseModel
 
@@ -58,7 +57,7 @@ class Symptom(BaseModel):
     breathing_problem: bool = False
 ```
 
-Let's create a function to assign risk level based on the inputs.
+Let's create a function to assign a risk level based on the inputs.
 
 > This is just for learning and should not be used in real life, better consult a doctor.
 
@@ -72,13 +71,13 @@ def get_risk_level(symptom: Symptom):
             return 'moderate risk level. THIS IS A DEMO APP'
     
     if symptom.breathing_problem:
-        return 'High risk level. THIS IS A DEMO APP'
+        return 'High-risk level. THIS IS A DEMO APP'
     
     return 'THIS IS A DEMO APP'
 
 ```
 
-Lets create the API for checking the symptoms
+Let's create the API for checking the symptoms
 
 ```python
 @app.post('/api/covid-symptom-check')
@@ -94,7 +93,7 @@ We will use Tensorflow for creating the image classification model.
 
 > Tutorial for [Image Classification with Tensorflow](https://aniketmaurya.ml/blog/tensorflow/deep%20learning/2019/05/12/image-classification-with-tf2.html)
 
-First we create a function `load_model`, which will return a MobileNet CNN Model with pretrained weights i.e. it is already trained to classify 1000 unique category of images.
+We create a function `load_model`, which will return a MobileNet CNN Model with pre-trained weights i.e. it is already trained to classify 1000 unique categories of images.
 
 ```python
 import tensorflow as tf
@@ -107,14 +106,14 @@ def load_model():
 model = load_model()
 ```
 
-We define a `predict` function that will accepts an image and returns the predictions.
+We define a `predict` function that will accept an image and returns the predictions.
 We resize the image to 224x224 and normalize the pixel values to be in **[-1, 1]**.
 
 ```python
 from tensorflow.keras.applications.imagenet_utils import decode_predictions
 ```
-`decode_predictions` is used to decode class name of the predicted object. 
-Here we will return top-2 probable class.
+`decode_predictions` is used to decode the class name of the predicted object. 
+Here we will return the top-2 probable class.
 
 ```python
 def predict(image: Image.Image):
@@ -136,7 +135,7 @@ def predict(image: Image.Image):
     return response
 ```
 
-Now we will create an API `/predict/image` which supports file upload. We will filter the file extension to support only jpg, jpeg and png format of images.
+Now we will create an API `/predict/image` which supports file upload. We will filter the file extension to support only jpg, jpeg, and png format of images.
 
 We will use Pillow to load the uploaded image.
 
