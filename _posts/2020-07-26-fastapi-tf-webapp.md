@@ -1,5 +1,5 @@
 ---
-title: Machine Learning APIs with FastAPI
+title: Building Machine Learning API with FastAPI
 description: Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs.
 categories: [python]
 
@@ -23,7 +23,7 @@ It provides support for Swagger UI out of the box.
 
 Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
 
-## Lets start with a simple hello-world example
+# Lets start with a simple hello-world example
 
 First we import `FastAPI` class and create and object `app`. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30), like we can pass the title and description for Swagger UI.
 
@@ -40,7 +40,55 @@ async def hello_world():
     return "hello world"
 ```
 
-## Image recognition API
+
+# Pydantic support
+
+One of my favourite feature offered by FastAPI is Pydantic support. We can define Pydantic models and request response will be handled by FastAPI for these models.
+Lets create a covid-19 symptom checker API to understand this.
+
+## Covid-19 symptom checker API
+We create request body, it is the format in which client should send the request.
+
+```python
+from pydantic import BaseModel
+
+class Symptom(BaseModel):
+    fever: bool = False
+    dry_cough: bool = False
+    tiredness: bool = False
+    breathing_problem: bool = False
+```
+
+Let's create a function to assign risk level based on the inputs.
+
+> This is just for learning and should not be used, better consult a doctor.
+
+```python
+def get_risk_level(symptom: Symptom):
+    if not (symptom.fever or symptom.dry_cough or symptom.tiredness or symptom.breathing_problem):
+        return 'Low risk level. THIS IS A DEMO APP'
+    
+    if not (symptom.breathing_problem or symptom.dry_cough):
+        if symptom.fever:
+            return 'moderate risk level. THIS IS A DEMO APP'
+    
+    if symptom.breathing_problem:
+        return 'High risk level. THIS IS A DEMO APP'
+    
+    return 'THIS IS A DEMO APP'
+
+```
+
+Lets create the API for checking the symptoms
+
+```python
+@app.post('/api/covid-symptom-check')
+def check_risk(symptom: Symptom):
+    return get_risk_level(symptom)
+```
+
+
+# Image recognition API
 
 We will create an API to classify images, we name it `predict/image`.
 We will use Tensorflow for creating the image classification model.
@@ -89,7 +137,7 @@ def predict(image: Image.Image):
     return response
 ```
 
-Now we will create an api `/predict/image` which supports file upload. We will filter the file extension to support only jpg, jpeg and png format of images.
+Now we will create an API `/predict/image` which supports file upload. We will filter the file extension to support only jpg, jpeg and png format of images.
 
 We will use Pillow to load the uploaded image.
 
@@ -111,22 +159,17 @@ async def predict_api(file: UploadFile = File(...)):
     return prediction
 ```
 
-## Finally our code will look like this -
+
+
+# Final code
 
 ```python
 import uvicorn
 from fastapi import FastAPI, File, UploadFile
-from starlette.responses import RedirectResponse
 
 from application.components import predict, read_imagefile
 
-app = FastAPI(title='Tensorflow Web app Starter Pack', description='<h2>Try this app by uploading any image with `predict/image`</h2><br>by Aniket Maurya')
-
-
-@app.get('/', include_in_schema=False)
-async def index():
-    return RedirectResponse(url='/docs')
-
+app = FastAPI()
 
 @app.post("/predict/image")
 async def predict_api(file: UploadFile = File(...)):
@@ -139,10 +182,15 @@ async def predict_api(file: UploadFile = File(...)):
     return prediction
 
 
+@app.post("/api/covid-symptom-check")
+def check_risk(symptom: Symptom):
+    return symptom_check.get_risk_level(symptom)
+
+
 if __name__ == "__main__":
     uvicorn.run(app, debug=True)
-```
 
+```
 
 <hr>
 <br>
