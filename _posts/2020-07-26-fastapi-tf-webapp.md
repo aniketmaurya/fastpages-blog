@@ -23,7 +23,7 @@ It provides support for Swagger UI out of the box.
 
 Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
 
-### A simple hello-world example
+## Lets start with a simple hello-world example
 
 First we import `FastAPI` class and create and object `app`. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30), like we can pass the title and description for Swagger UI.
 
@@ -40,7 +40,7 @@ async def hello_world():
     return "hello world"
 ```
 
-### Image recognition API
+## Image recognition API
 
 We will create an API to classify images, we name it `predict/image`.
 We will use Tensorflow for creating the image classification model.
@@ -111,7 +111,7 @@ async def predict_api(file: UploadFile = File(...)):
     return prediction
 ```
 
-Finally our code will look like this -
+## Finally our code will look like this -
 
 ```python
 import uvicorn
@@ -148,8 +148,6 @@ if __name__ == "__main__":
 <br>
 > Hope you liked the article.
 
-👉 [Twitter](https://twitter.com/aniketmaurya): [https://twitter.com/aniketmaurya](https://twitter.com/aniketmaurya)
+👉 Twitter: [https://twitter.com/aniketmaurya](https://twitter.com/aniketmaurya)
 
-👉 [Linkedin](https://linkedin.com/in/aniketmaurya): [https://linkedin.com/in/aniketmaurya](https://linkedin.com/in/aniketmaurya)
-
-👉 Mail: aniketmaurya@outlook.com
+👉 Linkedin: [https://linkedin.com/in/aniketmaurya](https://linkedin.com/in/aniketmaurya)
