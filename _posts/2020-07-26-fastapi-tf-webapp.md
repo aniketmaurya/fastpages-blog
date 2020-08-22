@@ -56,8 +56,48 @@ def load_model():
     model = tf.keras.applications.MobileNetV2(weights="imagenet")
     print("Model loaded")
     return model
+
+model = load_model()
 ```
 
+We define a `predict` function that will accepts an image and returns the predictions.
+We resize the image to 224x224 and normalize the pixel values to be in **[-1, 1]**.
+
+```python
+from tensorflow.keras.applications.imagenet_utils import decode_predictions
+```
+`decode_predictions` is used to decode class name of the predicted object. 
+Here we will return top-2 probable class.
+
+```python
+def predict(image: Image.Image):
+
+    image = np.asarray(image.resize((224, 224)))[..., :3]
+    image = np.expand_dims(image, 0)
+    image = image / 127.5 - 1.0
+
+    result = decode_predictions(model.predict(image), 2)[0]
+
+    response = []
+    for i, res in enumerate(result):
+        resp = {}
+        resp["class"] = res[1]
+        resp["confidence"] = f"{res[2]*100:0.2f} %"
+
+        response.append(resp)
+
+    return response
+```
+
+Now we will create an api `/predict/image` which supports file upload. We will filter the file extension to support only jpg, jpeg and png format of images.
+
+We will use Pillow to load the uploaded image.
+
+```python
+def read_imagefile(file) -> Image.Image:
+    image = Image.open(BytesIO(file))
+    return image
+```
 
 ```python
 @app.post("/predict/image")
@@ -71,13 +111,37 @@ async def predict_api(file: UploadFile = File(...)):
     return prediction
 ```
 
+Finally our code will look like this -
+
+```python
+import uvicorn
+from fastapi import FastAPI, File, UploadFile
+from starlette.responses import RedirectResponse
+
+from application.components import predict, read_imagefile
+
+app = FastAPI(title='Tensorflow Web app Starter Pack', description='<h2>Try this app by uploading any image with `predict/image`</h2><br>by Aniket Maurya')
 
 
+@app.get('/', include_in_schema=False)
+async def index():
+    return RedirectResponse(url='/docs')
 
 
+@app.post("/predict/image")
+async def predict_api(file: UploadFile = File(...)):
+    extension = file.filename.split(".")[-1] in ("jpg", "jpeg", "png")
+    if not extension:
+        return "Image must be jpg or png format!"
+    image = read_imagefile(await file.read())
+    prediction = predict(image)
+
+    return prediction
 
 
-
+if __name__ == "__main__":
+    uvicorn.run(app, debug=True)
+```
 
 
 <hr>
@@ -85,5 +149,7 @@ async def predict_api(file: UploadFile = File(...)):
 > Hope you liked the article.
 
 👉 [Twitter](https://twitter.com/aniketmaurya): [https://twitter.com/aniketmaurya](https://twitter.com/aniketmaurya)
+
+👉 [Linkedin](https://linkedin.com/in/aniketmaurya): [https://linkedin.com/in/aniketmaurya](https://linkedin.com/in/aniketmaurya)
 
 👉 Mail: aniketmaurya@outlook.com
