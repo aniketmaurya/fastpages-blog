@@ -189,9 +189,13 @@ if __name__ == "__main__":
 
 ```
 
+> [FastAPI documentation](https://fastapi.tiangolo.com/) is the best place to learn more about core concepts of the framework. 
+
 <hr>
 <br>
 > Hope you liked the article.
+
+Feel free to ask your questions in the comments or reach me out personally
 
 👉 Twitter: [https://twitter.com/aniketmaurya](https://twitter.com/aniketmaurya)
 
