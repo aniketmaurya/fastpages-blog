@@ -3,7 +3,7 @@ title: Building Machine Learning API with FastAPI
 description: Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs.
 categories: [python]
 
-toc: false
+toc: true
 layout: post
 badges: true
 comments: true
@@ -16,12 +16,11 @@ keywords: tensorflow, fastapi, python, web development, machine learning, comput
 
 ![](https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png "Source- FastAPI Docs")
 
-> FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
 
 FastAPI is a high performance asynchronous framework for building APIs in Python.
 It provides support for Swagger UI out of the box.
 
-Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
+> Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
 
 # Lets start with a simple hello-world example
 
@@ -158,7 +157,6 @@ async def predict_api(file: UploadFile = File(...)):
 
     return prediction
 ```
-
 
 
 # Final code
