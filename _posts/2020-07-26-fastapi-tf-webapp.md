@@ -60,7 +60,7 @@ class Symptom(BaseModel):
 
 Let's create a function to assign risk level based on the inputs.
 
-> This is just for learning and should not be used, better consult a doctor.
+> This is just for learning and should not be used in real life, better consult a doctor.
 
 ```python
 def get_risk_level(symptom: Symptom):
