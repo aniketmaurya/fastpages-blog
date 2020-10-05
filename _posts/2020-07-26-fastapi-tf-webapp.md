@@ -3,7 +3,7 @@ title: Building Machine Learning API with FastAPI and Tensorflow
 description: Tutorial on FastAPI - high performance asynchronous framework for faster development of production ready APIs.
 categories: [python]
 
-toc: false
+toc: true
 layout: post
 badges: true
 comments: true
