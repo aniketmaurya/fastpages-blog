@@ -3,7 +3,7 @@ title: Deploy Machine Learning Web Apps for Free
 description: Beginner level tutorial, learn to deploy Python Tensorflow & FastAPI Web app on Heroku Cloud in 5 minutes.
 categories: [python]
 
-toc: true
+toc: false
 layout: post
 badges: true
 comments: true
@@ -14,15 +14,9 @@ image: https://cdn-images-1.medium.com/max/6706/0*m45LdHFZa0noxH-0
 keywords: tensorflow, fastapi, python, machine learning, computer vision, deploy, cloud
 ---
 
-**This blog is also availble as YouTube tutorial.**
-
-[![](http://img.youtube.com/vi/23R2eI95S30/0.jpg)](https://youtu.be/9gSkdEWx_VA "Deploy Machine Learning Web Apps for Free")
-https://youtu.be/9gSkdEWx_VA
-
 
 # Deploy Machine Learning Web Apps for Free
 
-Deploy Machine Learning Web Apps for Free
 
 ### In this tutorial, I will explain how to deploy any Python web app on Heroku cloud.
 
@@ -30,12 +24,13 @@ Deploy Machine Learning Web Apps for Free
 
 Deploying a Machine Learning model is a difficult task due to the requirement of large memory and powerful computation. This tutorial focuses on a simple deployment technique that can be used to deploy any Python web app for free.
 
-Read my previous article to learn how to build an [**“Image classification web app with FastAPI and Tensorflow”](https://towardsdatascience.com/image-classification-api-with-tensorflow-and-fastapi-fc85dc6d39e8?source=friends_link&sk=3f05ddb711a160fa4e350c150aa74a5d)**
+> Read my previous article to learn how to build an [“Image classification web app with FastAPI and Tensorflow”](https://towardsdatascience.com/image-classification-api-with-tensorflow-and-fastapi-fc85dc6d39e8?source=friends_link&sk=3f05ddb711a160fa4e350c150aa74a5d)
+
 > # I have also created a YouTube tutorial on Deploying Python app on Heroku
 
 <center><iframe width="560" height="315" src="https://www.youtube.com/embed/9gSkdEWx_VA" frameborder="0" allowfullscreen></iframe></center>
 
-First of all, you will need a [**Heroku](http://heroku.com)** id, so go now and register for a free account.
+First of all, you will need a [Heroku](http://heroku.com) id, so go now and register for a free account.
 
 For deploying any Python app on Heroku, we need three files- requirements.txt, runtime.txt, and Procfile.
 
@@ -46,12 +41,12 @@ For deploying any Python app on Heroku, we need three files- requirements.txt, r
 * ***Procfile* **is will contain the command to launch your web app. For example, you can use
 
     # method 1
-    python application/server/main.py
+    `python application/server/main.py`
 
     # or uvicorn if you are deploying a uvicorn server
-    uvicorn application.server.main:app
+    `uvicorn application.server.main:app`
 
-Go to your Heroku [**dashboard](https://dashboard.heroku.com/apps)** then click on **New** and **create a new app**
+Go to your Heroku [dashboard](https://dashboard.heroku.com/apps) then click on **New** and **create a new app**
 
 ![](https://cdn-images-1.medium.com/max/5724/1*mXrC1C1oudHwF3KAwxUegg.png)
 

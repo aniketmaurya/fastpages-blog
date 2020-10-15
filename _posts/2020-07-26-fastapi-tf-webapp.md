@@ -14,10 +14,9 @@ image: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
 keywords: tensorflow, fastapi, python, web development, machine learning, computer vision
 ---
 
-**This blog is also availble as YouTube tutorial.**
+**I have also created a Youtube tutorial version of this blog.**
 
-[![](http://img.youtube.com/vi/23R2eI95S30/0.jpg)](http://www.youtube.com/watch?v=23R2eI95S30 "Building Image classification API with Tensorflow and FastAPI")
-http://www.youtube.com/watch?v=23R2eI95S30
+<center><iframe width="560" height="315" src="http://www.youtube.com/watch?v=23R2eI95S30" frameborder="0" allowfullscreen></iframe></center>
 
 
 FastAPI is a high-performance asynchronous framework for building APIs in Python.
