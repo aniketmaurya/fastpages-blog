@@ -51,11 +51,12 @@ Go to your Heroku [dashboard](https://dashboard.heroku.com/apps) then click on *
 
 ![](https://cdn-images-1.medium.com/max/5724/1*mXrC1C1oudHwF3KAwxUegg.png)
 
+<br>
 Enter your **App name** and select the Server region that is nearest to your location and click on **Create app**
 
 ![](https://cdn-images-1.medium.com/max/2544/1*_r6QhIjusWh1D2NbzN_iwA.png)
 
-
+<br>
 # Step 3
 After you create the app, you will see the deployment methods — Heroku Git, GitHub, and Container Registry. I will use the GitHub method. For this just push your code repository to your GitHub account and then connect to GitHub on Heroku.
 
