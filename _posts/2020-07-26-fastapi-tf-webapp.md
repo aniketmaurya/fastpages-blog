@@ -15,7 +15,7 @@ keywords: tensorflow, fastapi, python, web development, machine learning, comput
 ---
 
 *Youtube tutorial version of this blog is also available*
-<iframe width="240" height="180" src="https://www.youtube.com/embed/23R2eI95S30?start=32" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe width="340" height="280" src="https://www.youtube.com/embed/23R2eI95S30?start=32" frameborder="10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 FastAPI is a high-performance asynchronous framework for building APIs in Python.
 It provides support for Swagger UI out of the box.

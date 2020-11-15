@@ -22,12 +22,12 @@ Do you want to deploy your Python code to web for free? Read this post to know t
 
 Deploying a Machine Learning model is a difficult task due to the requirement of large memory and powerful computation. This tutorial focuses on a simple deployment technique that can be used to deploy any Python web app for free.
 
-> Read my previous article to learn how to build an [“Image classification web app with FastAPI and Tensorflow”](https://towardsdatascience.com/image-classification-api-with-tensorflow-and-fastapi-fc85dc6d39e8?source=friends_link&sk=3f05ddb711a160fa4e350c150aa74a5d)
+> Read my previous article to learn how to build an [“Image classification web app with FastAPI and Tensorflow”](https://blog.aniketmaurya.ml/python/2020/07/26/fastapi-tf-webapp.html)
 
 
 If you prefer a video tutorial then click on the video below:
 
-<center><iframe width="240" height="180" src="https://www.youtube.com/embed/9gSkdEWx_VA" frameborder="10" allowfullscreen></iframe></center>
+<center><iframe width="340" height="280" src="https://www.youtube.com/embed/9gSkdEWx_VA" frameborder="10" allowfullscreen></iframe></center>
 
 # Step 1
 First of all, you will need a [Heroku](http://heroku.com) id, so go now and register for a free account.
