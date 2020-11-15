@@ -27,7 +27,7 @@ Deploying a Machine Learning model is a difficult task due to the requirement of
 
 If you prefer a video tutorial then click on the video below:
 
-<center><iframe width="340" height="280" src="https://www.youtube.com/embed/9gSkdEWx_VA" frameborder="10" allowfullscreen></iframe></center>
+<center><iframe width="540" height="480" src="https://www.youtube.com/embed/9gSkdEWx_VA" frameborder="10" allowfullscreen></iframe></center>
 
 # Step 1
 First of all, you will need a [Heroku](http://heroku.com) id, so go now and register for a free account.
@@ -49,12 +49,12 @@ For deploying any Python app on Heroku, we need three files- requirements.txt, r
 # Step 2
 Go to your Heroku [dashboard](https://dashboard.heroku.com/apps) then click on **New** and **create a new app**
 
-![](https://cdn-images-1.medium.com/max/5724/1*mXrC1C1oudHwF3KAwxUegg.png)
+>![](https://cdn-images-1.medium.com/max/5724/1*mXrC1C1oudHwF3KAwxUegg.png)
 
 <br>
 Enter your **App name** and select the Server region that is nearest to your location and click on **Create app**
 
-![](https://cdn-images-1.medium.com/max/2544/1*_r6QhIjusWh1D2NbzN_iwA.png)
+>![](https://cdn-images-1.medium.com/max/2544/1*_r6QhIjusWh1D2NbzN_iwA.png)
 
 <br>
 # Step 3
@@ -64,7 +64,7 @@ After you create the app, you will see the deployment methods — Heroku Git, Gi
 
 Then search the repository and connect it to your Heroku app.
 
-![](https://cdn-images-1.medium.com/max/4836/1*YpVzIgY35QUqq4uS5FKcxw.png)
+>![](https://cdn-images-1.medium.com/max/4836/1*YpVzIgY35QUqq4uS5FKcxw.png)
 
 After this, you will see a deploy button, select the branch of your Git repository that you want to be deployed, and click on **deploy**.
 
