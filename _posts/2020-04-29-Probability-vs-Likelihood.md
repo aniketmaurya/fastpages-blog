@@ -13,7 +13,6 @@ keywords: machine learning, statistics, autoencoders, probability, likelihood, d
 
 ![](https://raw.githubusercontent.com/aniketmaurya/machine_learning/master/blog_files/2020-04-29-Probability-vs-Likelyhood/dice-min.jpg "Photo by Riho Kroll on Unsplash")
 
-# Article is in progress 2020-04-30
 # Probability
 Probability is the quantitative measure of certainty of an event.
 Mathematically, probability $P$ for an event $E$ is defined as:
