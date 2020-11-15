@@ -14,16 +14,15 @@ image: https://fastapi.tiangolo.com/img/logo-margin/logo-teal.png
 keywords: tensorflow, fastapi, python, web development, machine learning, computer vision
 ---
 
-**I have also created a Youtube tutorial version of this blog.**
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/23R2eI95S30?start=32" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+*Youtube tutorial version of this blog is also available*
+<iframe width="460" height="215" src="https://www.youtube.com/embed/23R2eI95S30?start=32" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 FastAPI is a high-performance asynchronous framework for building APIs in Python.
 It provides support for Swagger UI out of the box.
 
 > Source code for this blog is available [aniketmaurya/tensorflow-fastapi-starter-pack](https://github.com/aniketmaurya/tensorflow-web-app-starter-pack)
 
-# Lets start with a simple hello-world example
+# hello-world of FastAPI
 
 First, we import `FastAPI` class and create an object `app`. This class has useful [parameters](https://github.com/tiangolo/fastapi/blob/a6897963d5ff2c836313c3b69fc6062051c07a63/fastapi/applications.py#L30) like we can pass the title and description for Swagger UI.
 
@@ -46,7 +45,7 @@ async def hello_world():
 One of my favorite features offered by FastAPI is Pydantic support. We can define Pydantic models and request-response will be handled by FastAPI for these models.
 Let's create a COVID-19 symptom checker API to understand this.
 
-## Covid-19 symptom checker API
+# Covid-19 symptom checker API
 We create a request body, it is the format in which the client should send the request. It will be used by Swagger UI.
 ```python
 from pydantic import BaseModel
