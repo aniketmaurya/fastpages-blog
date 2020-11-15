@@ -92,6 +92,9 @@ plugins:
 paginate: 15
 paginate_path: /page:num/
 
+# Set this to true to turn on annotations with hypothes.is
+annotations: true
+
 remote_theme: jekyll/minima
 
 titles_from_headings:
