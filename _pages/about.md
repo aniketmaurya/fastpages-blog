@@ -6,7 +6,7 @@ permalink: /about/
 
 <!-- ![alt text](https://avatars2.githubusercontent.com/u/21018714?s=460&u=f522c89f28b5a41593eb851cd85c58c3a7422fdf&v=4 =240x) -->
 
-<img src='https://avatars3.githubusercontent.com/u/21018714?s=460&u=9f1da241885e259bcb4500f06c1ffe93a895a9aa&v=4' height=350>
+<img src='https://ik.imagekit.io/aniket/aniket-cropped_Yktj1okS0.jpeg' height=350>
 
 
 Aniket Maurya is a professional Machine Learning and Computer Vision Engineer. He started his journey in Computer Vision at [COVIAM Technologies](https://coviam.com) to build Face Recognition system.
