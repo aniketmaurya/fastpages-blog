@@ -14,6 +14,7 @@ I’ve created [Gradsflow](https://github.com/gradsflow/gradsflow) and [Chitra](
 
 I focus on building problem solving products that leverage Artificial Intelligence.
 Started my career with a startup, I've worked on complete end-to-end process of Deep Learning i.e. Data collection, Model Training, API Development to Deployment. I've expertise in building and deploying scalable Deep Learning system in production.
+
 I believe in continuous learning, open-source and knowledge sharing.
 Started my [YouTube channel](https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4f5Xww) to share education video tutorials and tech Meetup on Machine Learning and Python Software development.
 
