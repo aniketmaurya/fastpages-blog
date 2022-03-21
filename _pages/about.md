@@ -9,22 +9,15 @@ permalink: /about/
 <img src='https://ik.imagekit.io/aniket/aniket-cropped-bg_oj2BphV1g.png' height=350>
 
 
-I am a professional Machine Learning Engineer and enthusiast about everything tech.
+👋 I’m a Machine Learning - Software Engineer from 🇮🇳
 
-I have created [Chitra](https://chitra.readthedocs.io/en/latest/) (full-stack Deep Learning Library that simlifies Model building to Deployment) and [Gradsflow](https://github.com/gradsflow/gradsflow) (an AutoML libray made with Optuna and PyTorch Lightning) along with some other open-source tools.
+I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries.
+I’ve created [Gradsflow](https://github.com/gradsflow/gradsflow) and [Chitra](https://chitra.readthedocs.io/en/latest/) - Python Libraries with aim to simplify AutoML and MLOps. I focus on building problem solving products that leverage Artificial Intelligence.
+Started my career with a startup, I've worked on complete end-to-end process of Deep Learning i.e. Data collection, Model Training, API Development to Deployment. I've expertise in building and deploying scalable Deep Learning system in production.
 
-I am a core maintainer of [PyTorch Lightning Flash](https://lightning-flash.readthedocs.io/en/latest/governance.html).
+Started my [YouTube channel](https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4f5Xww) to share education video tutorials and tech Meetup on Machine Learning and Python Software development.
 
-
-
-
-I am experienced in deploying robust and scalable Machine Learning & Deep Learning services.
-I actively work on various [Computer Vision Deep Learning projects](http://aniketmaurya.ml/projects.html) at COVIAM, some of those are - Watermark detection, Explicit Content detection, Face Spoof detection, Image Restoration with GANs.
-
-
-I like to share my limited knowledge of Machine Learning, Deep Learning and Programming with my Blog or [YouTube channel](https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4f5Xww).
-
-You can [Contact](mailto:hello@aniketmaurya.com) me for freelancing or consulation.
+You can [Contact](mailto:theaniketmaurya@gmail.com) me for freelancing or consulation.
 
 
 <br>
