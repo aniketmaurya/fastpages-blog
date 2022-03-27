@@ -4,7 +4,7 @@ description: A tutorial of Pytorch deep learning model deployment with TorchServ
 title: Deploying PyTorch in Production with TorchServe
 toc: true 
 badges: true
-hide: false
+hide: true
 comments: true
 categories: [pytorch, torchserve, mlops, production]
 image: images/chart-preview.png
