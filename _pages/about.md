@@ -9,7 +9,7 @@ permalink: /about/
 <img src='https://ik.imagekit.io/aniket/aniket-cropped-bg_oj2BphV1g.png' height=300>
 
 
-👋 I’m Developer Advocate at [Grid.ai](https://grid.ai) | [PyTorch Lightning](https://www.pytorchlightning.ai/) 🇮🇳. I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries.  
+👋 I’m a Developer Advocate at [Grid.ai](https://grid.ai) | [PyTorch Lightning](https://www.pytorchlightning.ai/) 🥑⚡️. I build Intelligent Software with ML and create/maintain some cool open-source ML/DL/Python libraries.  
 I’ve created [Gradsflow](https://github.com/gradsflow/gradsflow) and [Chitra](https://chitra.readthedocs.io/en/latest/) - Python Libraries with aim to simplify AutoML and MLOps.
 
 I love building problem solving products that leverage Artificial Intelligence.
