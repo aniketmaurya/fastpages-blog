@@ -6,7 +6,7 @@ toc: true
 badges: true
 comments: true
 categories: [kaggle]
-image: https://raw.githubusercontent.com/aniketmaurya/ml-resources/master/images/dcgan-vector-arithmetic.png
+image: https://images.pexels.com/photos/417196/pexels-photo-417196.jpeg?auto=compress&cs=tinysrgb
 nb_path: _notebooks/2022-04-03-happywhale-pytorch-training-from-scratch-lite.ipynb
 layout: notebook
 ---
@@ -31,6 +31,13 @@ layout: notebook
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this Notebook article, you will learn how to write a custom training loop in pure PyTorch, create custom torch <code>Dataset</code> class, compute metrics for model performance, and Scale the Training on any hardware like GPU, TPU, IPU or Distributed Training with <a href="https://devblog.pytorchlightning.ai/scale-your-pytorch-code-with-lightninglite-d5692a303f00">LightningLite</a>.</p>
 <p>Checkout the original <a href="https://www.kaggle.com/code/aniketmaurya/happywhale-pytorch-training-from-scratch-lite">Kaggle Notebook here.</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://images.pexels.com/photos/417196/pexels-photo-417196.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2" alt="Photo by Pixabay from Pexels"></p>
 
 </div>
 </div>
