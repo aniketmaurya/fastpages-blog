@@ -29,7 +29,7 @@ Started my [YouTube channel](https://www.youtube.com/channel/UCRuFsj94hWecPkuEr4
   </tr>
 </table>
 
-[Contact](mailto:theaniketmaurya@gmail.com) me to talk about ML/AI, freelancing or consulation.
+Contact me to talk about ML/AI, freelancing or consulation.
 
 
 <sup><sub>This website is powered by *[fastpages](https://github.com/fastai/fastpages)*</sub></sup>
