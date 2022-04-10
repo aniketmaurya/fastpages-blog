@@ -1,6 +1,6 @@
 ---
 keywords: PyTorch, deep learning, data
-description: Learn How to load image data with TorchData
+description: Learn How to load image data with TorchData and train Image classifier
 title: "TorchData: PyTorch Data loading utility library"
 toc: true 
 badges: true
@@ -34,6 +34,26 @@ layout: notebook
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>PyTorch 1.11 came with a new libray called <code>TorchData</code>. It provides common data loading primitives for easily constructing flexible and performant data pipelines. TorchData promotes composable data loading for code reusablity with <code>DataPipes</code>.</p>
+<p><code>DataPipes</code> is the building block of TorchData and works out of the box with PyTorch <code>DataLoader</code>. It can be chained to form a data pipeline where data will be transformed from each <code>DataPipe</code>.</p>
+<p>For example if we have image dataset in a folder with a CSV mapping of classes and we want to create a DataLoader that returns batch of image Tensor and labels.</p>
+<p>For this we need we do the following steps:</p>
+<ol>
+<li>Read and Parse the CSV</li>
+<li> a. Get image filepath
+ b. Decode label</li>
+<li>Read Image</li>
+<li>Convert Image to Tensor</li>
+<li>Return image Tensor and Label index</li>
+</ol>
+<p>These steps can be a chained DataPipe where the initial data will flow from the first step to the very last applying transformations in each step.</p>
+<p>Now, lets see how to do the same with TorchData code.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -58,19 +78,11 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os.path</span>
-<span class="kn">import</span> <span class="nn">re</span>
-
-<span class="kn">import</span> <span class="nn">torch</span>
-<span class="kn">from</span> <span class="nn">torch.utils.data.datapipes.utils.decoder</span> <span class="kn">import</span> <span class="n">imagehandler</span><span class="p">,</span> <span class="n">mathandler</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">torchdata.datapipes.iter</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">FileOpener</span><span class="p">,</span>
     <span class="n">Filter</span><span class="p">,</span>
-    <span class="n">IterableWrapper</span><span class="p">,</span>
-    <span class="n">IterKeyZipper</span><span class="p">,</span>
-    <span class="n">Mapper</span><span class="p">,</span>
-    <span class="n">RoutedDecoder</span><span class="p">,</span>
-    <span class="n">TarArchiveLoader</span><span class="p">,</span><span class="n">FileLister</span><span class="p">,</span><span class="n">CSVParser</span><span class="p">,</span> <span class="n">Filter</span><span class="p">,</span> 
+    <span class="n">FileLister</span><span class="p">,</span> <span class="n">Filter</span><span class="p">,</span> 
 <span class="p">)</span>
 
 
@@ -86,6 +98,23 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We will use CIFAR-10 dataset which has the same structure as we discussed.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>From TorchData docs:</p>
+<blockquote><p>We have implemented over 50 DataPipes that provide different core functionalities, such as opening files, parsing texts, transforming samples, caching, shuffling, and batching. For users who are interested in connecting to cloud providers (such as Google Drive or AWS S3), the fsspec and iopath DataPipes will allow you to do so. The documentation provides detailed explanations and usage examples of each IterDataPipe and MapDataPipe.</p>
+</blockquote>
+<p>Basically, TorchData has already implemented 50 DataPipes which you can use directly. Here we will use use <code>FileOpener</code> and <code>parse_csv</code> to read the csv data.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -94,28 +123,14 @@ layout: notebook
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ROOT</span> <span class="o">=</span> <span class="s2">&quot;/Users/aniket/datasets/cifar-10/train&quot;</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">csv_dp</span> <span class="o">=</span> <span class="n">FileLister</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">/../trainLabels.csv&quot;</span><span class="p">)</span>
+<span class="n">csv_dp</span> <span class="o">=</span> <span class="n">FileLister</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">/../trainLabels.csv&quot;</span><span class="p">)</span>
 <span class="n">csv_dp</span> <span class="o">=</span> <span class="n">FileOpener</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">)</span>
 <span class="n">csv_dp</span> <span class="o">=</span> <span class="n">csv_dp</span><span class="o">.</span><span class="n">parse_csv</span><span class="p">()</span>
-<span class="n">csv_dp</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="s2">&quot;label&quot;</span><span class="p">)</span>
 
-<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">csv_dp</span><span class="p">]))}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">:</span> <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -127,9 +142,115 @@ layout: notebook
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/aniket/miniconda3/envs/am/lib/python3.9/site-packages/torch/utils/data/datapipes/iter/selecting.py:54: UserWarning: Lambda function is not supported for pickle, please use regular python function or functools.partial instead.
-  warnings.warn(&#34;Lambda function is not supported for pickle, please use &#34;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;id&#39;, &#39;label&#39;]
+[&#39;1&#39;, &#39;frog&#39;]
+[&#39;2&#39;, &#39;truck&#39;]
+[&#39;3&#39;, &#39;truck&#39;]
+[&#39;4&#39;, &#39;deer&#39;]
+[&#39;5&#39;, &#39;automobile&#39;]
+[&#39;6&#39;, &#39;automobile&#39;]
+[&#39;7&#39;, &#39;bird&#39;]
+[&#39;8&#39;, &#39;horse&#39;]
+[&#39;9&#39;, &#39;ship&#39;]
+[&#39;10&#39;, &#39;cat&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We don't need the header of csv in our datapipe (<code>[id, label]</code>), so we will use the inbuilt <code>Filter</code> DataPipe to remove it.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">csv_dp</span> <span class="o">=</span> <span class="n">Filter</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">!=</span><span class="s2">&quot;label&quot;</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">e</span><span class="p">:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">csv_dp</span><span class="p">]))}</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span> <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;1&#39;, &#39;frog&#39;]
+[&#39;2&#39;, &#39;truck&#39;]
+[&#39;3&#39;, &#39;truck&#39;]
+[&#39;4&#39;, &#39;deer&#39;]
+[&#39;5&#39;, &#39;automobile&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now, we have a DataPipe <code>csv_dp</code> which flows <code>file id</code> and <code>label</code>. We need to conver the file id into filepath and label in label index.</p>
+<p>We can map functions to the DataPipe and even form a chain of mapping to apply transformations.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_filename</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>    
+    <span class="n">idx</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">label</span>
+
+<span class="n">dp</span> <span class="o">=</span> <span class="n">csv_dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_filename</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dp</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;</span><span class="mi">4</span><span class="p">:</span> <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(&#39;/Users/aniket/datasets/cifar-10/train/1.png&#39;, &#39;frog&#39;)
+(&#39;/Users/aniket/datasets/cifar-10/train/2.png&#39;, &#39;truck&#39;)
+(&#39;/Users/aniket/datasets/cifar-10/train/3.png&#39;, &#39;truck&#39;)
+(&#39;/Users/aniket/datasets/cifar-10/train/4.png&#39;, &#39;deer&#39;)
+(&#39;/Users/aniket/datasets/cifar-10/train/5.png&#39;, &#39;automobile&#39;)
 </pre>
 </div>
 </div>
@@ -147,8 +268,18 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">csv_dp</span><span class="p">)</span>
-<span class="nb">next</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="n">file</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span>
+    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="n">label</span>
+
+<span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load_image</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dp</span><span class="p">):</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">5</span><span class="p">:</span> <span class="k">break</span>
 </pre></div>
 
     </div>
@@ -162,10 +293,120 @@ layout: notebook
 
 
 
-<div class="output_text output_subarea output_execute_result">
-<pre>[&#39;1&#39;, &#39;frog&#39;]</pre>
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
 </div>
 
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>frog
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>truck
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>truck
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>deer
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAJG0lEQVR4nD2WS2/cZxWHz3lv/8vM2DNjj29jJ3HSENTSFsqtFAqUgAQIJECw5COwYAuIDwALkECABBJ7EEKUmwSskGi5tVHTNEmbtonj2B5fxjOe+d/f95zDIsAXePT7PasHf/G7F5g5iSIXx6yjIMqA1gSWAUTEKI8iAIoExAYvpAgQAEBERAQQmIUABUBEmJmIAEAAgogIG0YwkW2Y8rO5baG2CQgyYEChyldnpYsjAs7KTGHUbi0KMBMh/peIAszCgCLAzCJCRIjIICzCzGaWZ977k+Pxg70jHbfanV6kIkFogmcfinmW2AgUz5t50+DF7cuPXDqfxDEzMzMgCCCjgPzvEAAAIKICZGAAMC/8/cUszxTYspaKxtaNNStCqCQQSsvFCZo40qSaPPf/vn7t6GT/4vb28vJykqbCQkQsjKzgf3QAEGZBfGjMTLNSBBHEOJui0co4cBVQADUv8jLPI9RtibQBGyVVVr21u7dzMOouLG5tbg6Wl7q9nlFaCz+cTwIMKCIizCLMYsqGrTUAKOQFPGpCgcZX3kAnbc9nxawpa2bnXMeJ1i4PtWZVn5xNp1mrnayvb1zavth2UeSc994zCGgWfiiMBExZV7VXiBjHsQAIAqMwSp5ncYKR1eSxqsuALChOaVAAIMZoQZkX2dmdWyfjk068uDnc7PV6LkoAkEMIDAEUCZlGGImZmRUCAEQoWrEKxoBvSmfiduKKpgoQaoE6SKSMBi2gPIcApJQanR7t1+M3d+4PBssbG1vtdieOYlHaiyIiE4QBgDhU2dwYQwhGNYJgLRowwAwobWeDAlbgmQM1CpUEJiDSAgQigGiD59n+ZOfgXuTiNE3jOI6cs9aa2jeIyCwiEuqyrAvrrEYVGSvIKJqZhYkFCgoNsFK6QbSCotgrEgGlNWClFAgAs2rKbJYTUAN1hoimqCqjFLAB5jI/dE76q5sJgaKgEyfKn03GZTY7v31l7luTyVkUpd43CMQiEIBFSMCBVzoEj8QKUEmd83R3vPc2iDIUAgj0omShlZapAWxsVsZBraysVEncBJ/EqU6TdGGh21pfW66ZuRIpmEfHhz6fWvEmVJob7+dGpwwxKwPlfLZ/r54cZlltIDSLaaebmr2D+6WLago42tleWlnZGt7e3xfGNC8XW/Gru6+01/J2ZO++cZNave7lJ9obj+Q7t3Q2W5CsyKbF/MjZ9qzSSXewlGAGHhBQKaPIr7Xbh5Mj30HT6SjUwU/OP/XYBLjppRqNWoins/m8KrmY1lVYXIh3syw/Hp/vdjeuPDG9WeV7O5PDnVk+pqDOSkx6g87WIBSzqqyV0qq/0FludyKRfmzXLa5KeM+lKxfXt8RTN3IJhpW17vDi+mC41O67zJ/0V3pL/QVF+enkOFPJ5qNP1xJXZWE1KhTNTT09Ot59OxSF0goAzPm1/pc+84mdty/Mq6yumlCHCxvnhEWW1858kxfZ5vJKEM7ySuKoLT3NtLqY5EfH2V7ha26tbm489iz7s6P9t4psDkwLLW2gFAO+IAE0C7r60FPnPvDYcF7UXpQPEoqyrOrtZljUlOWltWYym8Xbrqxr6S7vjQ7u3L3/aG/l/vEpsKa40z7/1LOXLpzuvvX6yy8djV5v4QTqvCKNzMZqk51OHty9sTncHq6vmrTDaGYnJ9PpZKm/lJe+KJs8y+fZ4pVLF/M8r8pykES29u/94DOnhb83OmtUTGUFvcHGE9uDJz4VJoent/5x98a/Tt56Q7lcGTbdpDUfjw6Yl9dwUZtWpwuLHY2+k8BiuyPKBd/cunl7MBik6bkiy5+8MPzY+54qgxQBLm/R4bjcH52O7u7eJ6nSTtLd7L7r0+++8qHh3evXX/jD8egufvvrX7v6/osEdvdwdu3G66vDrWc/9tHhYNFQoU0CyhljAFUStyPnhAh88CTz0peEt+7c29k56PcGWTa7ezC6tbP7ytzMo+7yQvroakuP71178c/4hY8//fi5lcWlwUuv3b59596Hn7saQD5/9SO9WOKkY2xaVsVgaSWNWk1dAwBq5UGhje/sPPjOd793cnT6wac/8rmvfFXq6sa//rkf8LUps46knF4+t7J352VzPC1u22N9NL5/cPDRqx//xre++YMf/uj3v33+ncMl63Srs0BE/cX+oL9qjHHOKTQZhcaoH//k5zdvvxpZ9+vnf7l55fHHL78jieIFCRttCEblhNLU54fnzPDCIwRz7yvXaq9vDQVla2PzL7/51XzUS5MoShIAjIxtp+00SZ11sUskjo7L+Wu3bn7yk1effPeTP/3Zz1/86x8vrnVdqk9Go1fuvGFbyepCl0pKnDIBiFhclLYWYJYVh0fHJ6eTB6OxBB9HifckAJE1rchqo5M4juOUNd4/PgTBL3zxi88888zu7oNfP//ba6+cp6qZHJ414z1DnSJkb09208iZk+nYh8ooJYGuXb/x+JPvvXb9VQ+qMUnj9cHBSVVXzhirAQGss9YaEs6qsr+8ury0NJ/N1tbXTifHf/rTH6osH4+zHJVJIi3YWx2srK4ZQkbtsqIos2x0PP7+D3648+ZO1tCbe8cPo8ETI9UaFAJiSYIBAUAkadXj8ThybnY2q+tw794DDOQZJE4FwFnXitpFTqa/1AfQZZbXrbZCNZ1MlwYri/1BYGFpgq8pBO+JvRBRXTcsAsIK1HQ2+9sLf3vuuedeu3mLCBoWDZpReWKqPTSyu7Orow5+9sufZQYg0GCMMSgAgZhFaR2agqkhYmYWgeBDlmd1XXvfUKC6rtMkubC9/e+XXp7OKgQUERIRBEAEAKV0nKYGUVurUCMQWmtBQBAjrQHRGUCIgw/EDCJK66XlvvdBhImYmfK8GB0eXriwPc99UZYAEkRIWJiV1koppdCIaGFEQERgZmstGI2IChGM1kpZFu89EQGCsGi0gYLWYJVKOt3hOccsZUPeB2ZGrR4GndaaiOq6Nk1FiKgVWKWYWRuDRgsIgyAqhdYmVrSPtHqYnSISQvBNw8IhhKJhIqqCR0TQKETC7JwzxgBAmqbmoTMKBEhRFHnvibx1lpkNWPIhCIgIgyiFiIhK2Uhr6xCRiJjZB684MFEg0oIcwv9DWCn1H6ZWEMA3cii1AAAAAElFTkSuQmCC
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>automobile
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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
+"
+>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>automobile
+</pre>
+</div>
 </div>
 
 </div>
@@ -174,6 +415,13 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Finally we map the datapipe to process image to Tensor and label to index.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -181,35 +429,10 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_filename</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>    
-    <span class="n">idx</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ROOT</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">idx</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">label</span>
-
-<span class="k">def</span> <span class="nf">load_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="n">file</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span>
-    <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file</span><span class="p">),</span> <span class="n">label</span>
-
-<span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">data</span>
     <span class="k">return</span> <span class="n">to_tensor</span><span class="p">(</span><span class="n">img</span><span class="p">),</span> <span class="n">labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span>
-</pre></div>
 
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="n">csv_dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">get_filename</span><span class="p">)</span>
-<span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">load_image</span><span class="p">)</span>
 <span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
 </pre></div>
 
@@ -220,6 +443,38 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you have come this far then I have a bonus for you. Train an image classifier using DataPipe and PyTorch Lightning Flash ⚡️</p>
+<p>Flash expects the dataloader to be in form of a dictionary with keys <code>input</code> and <code>target</code> where input will contain our image tensor and target will be the label index.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;input&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]})</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As we discussed that <code>DataPipes</code> are fully compatible with DataLoader so this is how you convert a DataPipe to DataLoader.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -229,7 +484,7 @@ layout: notebook
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dl</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span>
         <span class="n">dp</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
         <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
@@ -241,6 +496,13 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Training an Image Classifier with Flash is super easy. Flash provides Deep Learning tasks based APIs that you can use to train your model. Currently, our task is image classification so let's import the ImageClassifier and build our model.</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -248,7 +510,25 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">dl</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">flash.image</span> <span class="kn">import</span> <span class="n">ImageClassifier</span>
+<span class="kn">import</span> <span class="nn">flash</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">ImageClassifier</span><span class="p">(</span><span class="n">num_classes</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">),</span> <span class="n">backbone</span><span class="o">=</span><span class="s2">&quot;efficientnet_b0&quot;</span><span class="p">,</span> <span class="n">pretrained</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -260,12 +540,87 @@ layout: notebook
 
 <div class="output_area">
 
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>torch.Size([4, 3, 32, 32])</pre>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>Using &#39;efficientnet_b0&#39; provided by rwightman/pytorch-image-models (https://github.com/rwightman/pytorch-image-models).
+</pre>
+</div>
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create the trainer and finetune the model</span>
+<span class="n">trainer</span> <span class="o">=</span> <span class="n">flash</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>GPU available: False, used: False
+TPU available: False, using: 0 TPU cores
+IPU available: False, using: 0 IPUs
+HPU available: False, using: 0 HPUs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dl</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+  | Name          | Type           | Params
+-------------------------------------------------
+0 | train_metrics | ModuleDict     | 0     
+1 | val_metrics   | ModuleDict     | 0     
+2 | test_metrics  | ModuleDict     | 0     
+3 | adapter       | DefaultAdapter | 4.0 M 
+-------------------------------------------------
+4.0 M     Trainable params
+0         Non-trainable params
+4.0 M     Total params
+16.081    Total estimated model params size (MB)
+</pre>
+</div>
 </div>
 
 </div>
